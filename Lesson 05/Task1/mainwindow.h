@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QTime>
 
-#include "secundomer.h"
+#include "Stopwatch.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,7 +30,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Secundomer* sec;
+    Stopwatch* sec;
 
 };
 #endif // MAINWINDOW_H

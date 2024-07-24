@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ReceiveSecTime(QTime(0,0,0));
 
-    sec = new Secundomer(this);
+    sec = new Stopwatch(this);
 
-    connect(sec, &Secundomer::sig_newTime, this, &MainWindow::ReceiveSecTime);
+    connect(sec, &Stopwatch::sig_newTime, this, &MainWindow::ReceiveSecTime);
 
 }
 
@@ -21,16 +21,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::ReceiveSecTime(QTime time)
 {
-    ui->label->setText(time.toString("hh:mm:ss.zzz"));
+    ui->label->setText("Время: " + time.toString("hh:mm:ss.z"));
 }
 
 
 void MainWindow::on_pb_startstop_clicked()
 {
-    if (ui->pb_startstop->isChecked())
+    if (ui->pb_startstop->text() == "Старт") {
+        ui->pb_startstop->setText("Стоп");
+        ui->pb_circle->setEnabled(true);
         sec->start();
-    else
+    }
+    else {
+        ui->pb_startstop->setText("Старт");
+        ui->pb_circle->setEnabled(false);
         sec->stop();
+    }
 }
 
 
@@ -42,10 +48,8 @@ void MainWindow::on_pb_clear_clicked()
 
 void MainWindow::on_pb_circle_clicked()
 {
-    if (!ui->pb_startstop->isChecked())
-        return;
     ui->textBrowser->append("Круг "
-                            + QString::number(sec->getCircleNumber()) + ": "
-                            + sec->getCircleTime().toString("hh:mm:ss.zzz"));
+                            + QString::number(sec->getCircleNumber()) + ", время: "
+                            + sec->getCircleTime().toString("hh:mm:ss.z") + " сек");
 }
 

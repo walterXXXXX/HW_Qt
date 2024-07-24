@@ -1,22 +1,22 @@
-#include "secundomer.h"
+#include "Stopwatch.h"
 
-Secundomer::Secundomer(QObject *parent)
+Stopwatch::Stopwatch(QObject *parent)
     : QObject{parent}
 {
     timer = new QTimer(this);
     timer->setInterval(step);
-    connect(timer, &QTimer::timeout, this, &Secundomer::newTime);
+    connect(timer, &QTimer::timeout, this, &Stopwatch::newTime);
 }
 
-void Secundomer::start() {
+void Stopwatch::start() {
     timer->start();
 }
 
-void Secundomer::stop() {
+void Stopwatch::stop() {
     timer->stop();
 }
 
-QTime Secundomer::getCircleTime() {
+QTime Stopwatch::getCircleTime() {
     QTime circleTime(0,0,0);
     circleTime = circleTime.addMSecs(lastTime.msecsTo(curTime));
     lastTime = curTime;
@@ -24,18 +24,18 @@ QTime Secundomer::getCircleTime() {
     return circleTime;
 }
 
-int Secundomer::getCircleNumber() {
+int Stopwatch::getCircleNumber() {
     return circleNumber;
 }
 
-void Secundomer::clear() {
+void Stopwatch::clear() {
     curTime = QTime(0,0,0);
     lastTime = QTime(0,0,0);
     circleNumber = 0;
     emit sig_newTime(QTime(curTime));
 }
 
-void Secundomer::newTime() {
+void Stopwatch::newTime() {
     curTime = curTime.addMSecs(step);
     emit sig_newTime(QTime(curTime));
 }

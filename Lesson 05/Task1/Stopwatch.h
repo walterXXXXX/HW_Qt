@@ -5,11 +5,11 @@
 #include <QTime>
 #include <QTimer>
 
-class Secundomer : public QObject
+class Stopwatch : public QObject
 {
     Q_OBJECT
 public:
-    explicit Secundomer(QObject *parent = nullptr);
+    explicit Stopwatch(QObject *parent = nullptr);
     void start();
     void stop();
     void clear();
@@ -20,7 +20,7 @@ private:
     QTime curTime = QTime(0,0,0);
     QTime lastTime = QTime(0,0,0);
     QTimer* timer;
-    int step = 10; // шаг секундомера в 10 мс
+    int step = 100; // шаг секундомера в мс
     int circleNumber = 0;
 
     void newTime();
