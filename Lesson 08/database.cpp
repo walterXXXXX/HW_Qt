@@ -88,7 +88,7 @@ void DataBase::RequestToDB(int typeRequest)
                   "JOIN film_category fc on f.film_id = fc.film_id "
                   "JOIN category c on c.category_id  = fc.category_id "
                   "WHERE c.name = 'Horror'";
-        sqlModel->setQuery(request);
+        sqlModel->setQuery(request, *dataBase);
         break;
     }
     case requestComedy: {
@@ -97,7 +97,7 @@ void DataBase::RequestToDB(int typeRequest)
                   "JOIN film_category fc on f.film_id = fc.film_id "
                   "JOIN category c on c.category_id  = fc.category_id "
                   "WHERE c.name = 'Comedy'";
-        sqlModel->setQuery(request);
+        sqlModel->setQuery(request, *dataBase);
         break;
 
     }
